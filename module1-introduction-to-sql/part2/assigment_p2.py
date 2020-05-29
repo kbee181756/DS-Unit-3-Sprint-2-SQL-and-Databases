@@ -11,14 +11,16 @@ curs = conn.cursor()
 #Use df.to_sql (documentation) to insert the data into a new table review in the SQLite3 database
 query_1a = 'DROP TABLE review'
 curs.execute(query_1a)
-data.rename(columns={'index': 'rep_col'})
+data.index.name = 'id'
+
+#print(data.columns) 
 
 pd.DataFrame.to_sql(self = data, name = "review", con = conn, index=True)
 
 
 
-query_1 = 'SELECT COUNT(review.index) FROM review;'
-curs.execute(query_1)
+query_1 = 'SELECT COUNT(id) FROM review;'
+print(curs.execute(query_1).fetchone())
 
 #query_1a = 'DROP TABLE review'
 # How many users who reviewed at least 100 Nature in the category also reviewed at least 100 
